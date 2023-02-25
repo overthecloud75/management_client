@@ -18,7 +18,6 @@ class Analyze:
             self.interval = interval
 
         self.timestamp = datetime.now()
-        print(self.timestamp)
         self.previous_timestamp  = self.timestamp - timedelta(seconds=self.interval)
 
     def _parse_nginx_access_log(self, line):
@@ -71,7 +70,7 @@ class Analyze:
             datetime_timestamp = datetime_timestamp + timedelta(hours=9)
             url_list = line_list[11].split(':')
             scheme = url_list[0]
-            log_dict = {'ip': line_list[2], 'host': line_list[12], 'method': line_list[3], 'scheme': scheme, 'url': line_list[4], 
+            log_dict = {'ip': line_list[8], 'host': line_list[12], 'method': line_list[3], 'scheme': scheme, 'url': line_list[4], 
                     'http_version': line_list[9], 'status': line_list[13], 'size': '-', 'referer': '-', 'user_agent': line_list[10], 'body': '-', 'request_time': '-'}
 
             if MANAGEMENT_TYPE == 'client':
