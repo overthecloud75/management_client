@@ -68,10 +68,14 @@ class Analyze:
             log_dict = {}
         else:
             datetime_timestamp = datetime_timestamp + timedelta(hours=9)
-            url_list = line_list[11].split(':')
-            scheme = url_list[0]
+            scheme = '-'
+            if line_list[6] == '80':
+                scheme = 'http'
+            elif line_list[6] == '443':
+                scheme = 'https'
+
             log_dict = {'ip': line_list[8], 'host': line_list[12], 'method': line_list[3], 'scheme': scheme, 'url': line_list[4], 
-                    'http_version': line_list[9], 'status': line_list[13], 'size': '-', 'referer': '-', 'user_agent': line_list[10], 'body': '-', 'request_time': '-'}
+                    'http_version': line_list[9], 'status': line_list[13], 'size': '-', 'referer': line_list[11], 'user_agent': line_list[10], 'body': '-', 'request_time': '-'}
 
             if MANAGEMENT_TYPE == 'client':
                 log_dict['timestamp'] = datetime_timestamp.strftime('%Y-%m-%d:%H:%M:%S')
